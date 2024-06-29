@@ -25,7 +25,7 @@ public class CategoryController {
         return categoryService.saveCategory(categoryCreateDto);
     }
     @GetMapping
-    List<Category> getAllCategories() {
+    List<CategoryDto> getAllCategories() {
         return categoryService.getAllCategories();
     }
 }

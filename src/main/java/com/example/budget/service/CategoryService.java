@@ -8,7 +8,6 @@ import com.example.budget.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,16 +16,22 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
-    }
-
     public CategoryDto saveCategory(CategoryCreateDto categoryCreateDto) {
-        Category category = Category.builder()
+        Category categoryEntity = Category.builder()
                 .name(categoryCreateDto.name())
                 .type(categoryCreateDto.type())
                 .build();
-        Category savedCategory = categoryRepository.save(category);
-        return new CategoryDto(savedCategory.getId(), savedCategory.getName(), savedCategory.getType());
+        Category savedCategory = categoryRepository.save(categoryEntity);
+        return CategoryMapper.toDTO(savedCategory);
     }
+
+    public List<CategoryDto> getAllCategories() {
+        List<Category> categoriesEntity = categoryRepository.findAll();
+        List<CategoryDto> listCategoryDto = categoriesEntity
+                .stream()
+                .map(e -> CategoryMapper.toDTO(e))
+                .toList();
+        return listCategoryDto;
+    }
+
 }
