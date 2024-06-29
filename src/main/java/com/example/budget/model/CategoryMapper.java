@@ -1,15 +1,13 @@
-package com.example.budget.service;
+package com.example.budget.model;
 
 
-import com.example.budget.model.Category;
-import com.example.budget.model.CategoryDto;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
- class CategoryMapper {
+ public class CategoryMapper {
 
-    static CategoryDto toDTO(Category category) {
+    public static CategoryDto toDTO(Category category) {
         return new CategoryDto(category.getId(), category.getName(), category.getType());
     }
 
