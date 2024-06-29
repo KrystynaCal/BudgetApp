@@ -22,6 +22,11 @@ public class CategoryService {
     }
 
     public CategoryDto saveCategory(CategoryCreateDto categoryCreateDto) {
-        return categoryRepository.save();
+        Category category = Category.builder()
+                .name(categoryCreateDto.name())
+                .type(categoryCreateDto.type())
+                .build();
+        Category savedCategory = categoryRepository.save(category);
+        return new CategoryDto(savedCategory.getId(), savedCategory.getName(), savedCategory.getType());
     }
 }
