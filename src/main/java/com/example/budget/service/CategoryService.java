@@ -34,5 +34,4 @@ public class CategoryService {
                 .toList();
         return listCategoryDto;
     }
-
 }
