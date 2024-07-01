@@ -8,6 +8,9 @@ import com.example.budget.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+
 @Service
 @RequiredArgsConstructor
 public class TransactionService {
@@ -24,5 +27,14 @@ public class TransactionService {
 
         Transaction savedTransaction = transactionRepository.save(transactionEntity);
         return TransactionMapper.toDto(savedTransaction);
+    }
+
+    public List<TransactionDto> getAllTransactions() {
+        List<Transaction> transactionsEntity = transactionRepository.findAll();
+        List<TransactionDto> listTransactionDto =  transactionsEntity
+                .stream()
+                .map(TransactionMapper::toDto)
+                .toList();
+        return listTransactionDto;
     }
 }
