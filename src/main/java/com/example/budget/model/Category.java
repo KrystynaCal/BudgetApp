@@ -1,6 +1,5 @@
 package com.example.budget.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,11 +24,9 @@ public class Category {
     private long id;
 
     @NotNull
-    @Column(unique = true)
     private String name;
 
-    @Column(unique = true)
-    private String type;
+    private CategoryType categoryType;
 
 }
 

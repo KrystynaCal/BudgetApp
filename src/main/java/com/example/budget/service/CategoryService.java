@@ -20,7 +20,7 @@ public class CategoryService {
     public CategoryDto saveCategory(CategoryCreateDto categoryCreateDto) {
         Category categoryEntity = Category.builder()
                 .name(categoryCreateDto.name())
-                .type(categoryCreateDto.type())
+                .categoryType(categoryCreateDto.categoryType())
                 .build();
         Category savedCategory = categoryRepository.save(categoryEntity);
         return CategoryMapper.toDTO(savedCategory);
