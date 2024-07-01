@@ -40,4 +40,14 @@ public class CategoryService {
         Optional<Category> category = categoryRepository.findById(categoryId);
         return category;
     }
+
+    public Integer getTotalAmountForCategory(Long categoryId) {
+        Optional<Category> categoryOpt = categoryRepository.findById(categoryId);
+        if (categoryOpt.isPresent()) {
+            Category category = categoryOpt.get();
+            return category.getTotalAmount();
+        } else {
+            throw new IllegalArgumentException("Invalid category ID");
+        }
+    }
 }
