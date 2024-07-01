@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -33,5 +34,10 @@ public class CategoryService {
                 .map(CategoryMapper::toDTO)
                 .toList();
         return listCategoryDto;
+    }
+
+    public Optional<Category> findById(Long categoryId) {
+        Optional<Category> category = categoryRepository.findById(categoryId);
+        return category;
     }
 }
