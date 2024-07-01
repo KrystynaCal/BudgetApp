@@ -18,6 +18,7 @@ public class TransactionService {
         Transaction transactionEntity = Transaction.builder()
                 .amount(transactionCreateDto.amount())
                 .name(transactionCreateDto.name())
+                .date(transactionCreateDto.date())
                 .description(transactionCreateDto.description())
                 .build();
 
