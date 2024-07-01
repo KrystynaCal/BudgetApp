@@ -30,7 +30,7 @@ public class CategoryService {
         List<Category> categoriesEntity = categoryRepository.findAll();
         List<CategoryDto> listCategoryDto = categoriesEntity
                 .stream()
-                .map(e -> CategoryMapper.toDTO(e))
+                .map(CategoryMapper::toDTO)
                 .toList();
         return listCategoryDto;
     }
