@@ -2,9 +2,9 @@ package com.example.budget.service;
 
 
 import com.example.budget.model.Category;
-import com.example.budget.model.CategoryCreateDto;
-import com.example.budget.model.CategoryDto;
-import com.example.budget.model.CategoryMapper;
+import com.example.budget.dto.CategoryCreateDto;
+import com.example.budget.dto.CategoryDto;
+import com.example.budget.mapper.CategoryMapper;
 import com.example.budget.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

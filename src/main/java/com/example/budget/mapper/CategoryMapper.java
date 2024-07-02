@@ -1,6 +1,8 @@
-package com.example.budget.model;
+package com.example.budget.mapper;
 
 
+import com.example.budget.model.Category;
+import com.example.budget.dto.CategoryDto;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

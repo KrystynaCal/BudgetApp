@@ -1,7 +1,7 @@
 package com.example.budget.controller;
 
-import com.example.budget.model.TransactionCreateDto;
-import com.example.budget.model.TransactionDto;
+import com.example.budget.dto.TransactionCreateDto;
+import com.example.budget.dto.TransactionDto;
 import com.example.budget.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

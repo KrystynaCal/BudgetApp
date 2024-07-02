@@ -1,7 +1,7 @@
 package com.example.budget.controller;
 
-import com.example.budget.model.CategoryCreateDto;
-import com.example.budget.model.CategoryDto;
+import com.example.budget.dto.CategoryCreateDto;
+import com.example.budget.dto.CategoryDto;
 import com.example.budget.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
