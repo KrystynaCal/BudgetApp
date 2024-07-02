@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 public class TransactionMapper {
 
     public static TransactionDto toDto(Transaction transaction) {
-        return new TransactionDto(transaction.getId(), transaction.getAmount(), transaction.getName(), transaction.getDate(), transaction.getDescription(), transaction.getCategory().getName());
+        return new TransactionDto(transaction.getId(), transaction.getAmount(), transaction.getName(), transaction.getDate(), transaction.getDescription(), transaction.getCategory().getId(), transaction.getCategory().getName());
     }
 }

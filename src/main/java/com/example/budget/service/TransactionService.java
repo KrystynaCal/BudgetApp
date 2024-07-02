@@ -50,4 +50,13 @@ public class TransactionService {
                 .toList();
         return listTransactionDto;
     }
+
+    public List<TransactionDto> findByCategoryId(Long categoryId) {
+        List<Transaction> transactionsEntityByCategoryId = transactionRepository.findByCategoryId(categoryId);
+        List<TransactionDto> listTransactionDtoByCategoryId = transactionsEntityByCategoryId
+                .stream()
+                .map(TransactionMapper::toDto)
+                .toList();
+        return listTransactionDtoByCategoryId;
+    }
 }
