@@ -59,4 +59,8 @@ public class TransactionService {
                 .toList();
         return listTransactionDtoByCategoryId;
     }
+
+    public void deleteTransaction(long id) {
+        transactionRepository.deleteById(id);
+    }
 }
