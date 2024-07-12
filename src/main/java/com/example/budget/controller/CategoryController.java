@@ -44,9 +44,6 @@ public class CategoryController {
     }
 
 
-    @GetMapping("/total-amount")
-    public Integer getTotalAmount(@RequestParam Long categoryId) {
-        return categoryService.getTotalAmountForCategory(categoryId);
-    }
+
 
 }
