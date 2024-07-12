@@ -9,6 +9,7 @@ import com.example.budget.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,7 @@ public class CategoryService {
         Category categoryEntity = Category.builder()
                 .name(categoryCreateDto.name())
                 .categoryType(categoryCreateDto.categoryType())
+                .transactions(new ArrayList<>())
                 .build();
         Category savedCategory = categoryRepository.save(categoryEntity);
         return CategoryMapper.toDTO(savedCategory);

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <title>Create Category</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Nowa kategoria</h1>
+
+<form th:action="@{/categories/create}" th:object="${categoryCreateDto}" method="post">
+    <div>
+        <label>Nazwa
+            <input type="text" th:field="*{name}" required>
+        </label>
+    </div>
+    <div>
+        <label>Rodzaj
+            <select th:field="*{categoryType}" class="form-control" required>
+                <option value="" disabled selected>Select a type</option>
+                <option value="INCOME">Wpływy</option>
+                <option value="EXPENSE">Wydatki</option>
+            </select>
+        </label>
+    </div>
+    <button type="submit">Zapisz</button>
+</form>
+
+</body>
+</html>

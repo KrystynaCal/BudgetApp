@@ -30,6 +30,7 @@ public class Category {
     @NotNull
     private String name;
 
+    @NotNull
     private CategoryType categoryType;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
