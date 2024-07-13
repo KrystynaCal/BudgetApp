@@ -10,8 +10,12 @@
 
 <div class="categories">
     <div th:each="category : ${categoriesList}" class="category">
-        <p th:text="${category.name()}">Nazwa kategorii</p>
-        <span th:text="${category.totalAmount() + 'zł '}">Kwota</span>
+        <a th:href="@{'/categories/' + ${category.id()}}" class="category-link">
+            <div class="category-content">
+                <p th:text="${category.name()}">Nazwa kategorii</p>
+                <span th:text="${category.totalAmount()} + 'zł '">Kwota</span>
+            </div>
+        </a>
     </div>
     <div class="category add-category">
         <a href="/categories/create" class="plus-button">+</a>

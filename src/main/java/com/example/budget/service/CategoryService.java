@@ -42,4 +42,14 @@ public class CategoryService {
         Optional<Category> category = categoryRepository.findById(categoryId);
         return category;
     }
+
+    public CategoryDto getCategoryById(Long categoryId) {
+        Optional<Category> categoryOpt = categoryRepository.findById(categoryId);
+        if (categoryOpt.isPresent()) {
+            Category category = categoryOpt.get();
+            return CategoryMapper.toDTO(category);
+        } else {
+            throw new IllegalArgumentException("Invalid category ID");
+        }
+    }
 }
