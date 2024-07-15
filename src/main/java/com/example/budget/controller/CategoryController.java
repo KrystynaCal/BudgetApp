@@ -6,10 +6,12 @@ import com.example.budget.dto.TransactionDto;
 import com.example.budget.service.CategoryService;
 import com.example.budget.service.TransactionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.YearMonth;
 import java.util.List;
 
 @Controller
@@ -36,15 +38,18 @@ public class CategoryController {
 
     @PostMapping("/create")
     public String createCategory(@ModelAttribute CategoryCreateDto categoryCreateDto, Model model) {
-        model.addAttribute("categoryCreateDto", categoryCreateDto);
         categoryService.saveCategory(categoryCreateDto);
         return "redirect:/categories";
     }
 
     @GetMapping("/{categoryId}")
-    public String viewCategory(@PathVariable Long categoryId, Model model) {
+    public String viewCategory(@PathVariable Long categoryId, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM") YearMonth month, Model model) {
+        if (month == null) {
+            month = YearMonth.now();
+        }
         CategoryDto categoryDto = categoryService.getCategoryById(categoryId);
-        List<TransactionDto> transactions = transactionService.findByCategoryId(categoryId);
+        List<TransactionDto> transactions = transactionService.findByCategoryIdAndMonth(categoryId, month);
+
 
         model.addAttribute("category", categoryDto);
         model.addAttribute("transactions", transactions);

@@ -25,7 +25,6 @@ public class TransactionController {
 
     @PostMapping("/create")
     public String createTransaction(@ModelAttribute TransactionCreateDto transactionCreateDto, @RequestParam Long categoryId, Model model) {
-        model.addAttribute("categoryCreateDto", transactionCreateDto);
         TransactionDto transactionDto = transactionService.saveTransaction(transactionCreateDto, categoryId);
         model.addAttribute("categoryId", categoryId);
         return "redirect:/categories/" + categoryId;
