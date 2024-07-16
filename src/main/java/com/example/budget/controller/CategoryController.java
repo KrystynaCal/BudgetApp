@@ -3,6 +3,7 @@ package com.example.budget.controller;
 import com.example.budget.dto.CategoryCreateDto;
 import com.example.budget.dto.CategoryDto;
 import com.example.budget.dto.TransactionDto;
+import com.example.budget.model.CategoryType;
 import com.example.budget.service.CategoryService;
 import com.example.budget.service.TransactionService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.YearMonth;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/categories")
@@ -24,14 +26,21 @@ public class CategoryController {
 
     @GetMapping
     public String getAllCategories(@RequestParam(value = "yearMonth", required = false)
-                                       @DateTimeFormat(pattern = "yyyy-MM") YearMonth yearMonth, Model model) {
-        if(yearMonth == null){
+                                   @DateTimeFormat(pattern = "yyyy-MM") YearMonth yearMonth, Model model) {
+        if (yearMonth == null) {
             yearMonth = YearMonth.now();
         }
         List<CategoryDto> categoriesList = categoryService.getAllCategories(yearMonth);
-        System.out.println("Fetched Categories: " + categoriesList);
         model.addAttribute("categoriesList", categoriesList);
         model.addAttribute("selectedMonth", yearMonth);
+
+        int totalExpense = categoryService.getTotalAmountByTypeAndMonth(CategoryType.EXPENSE, yearMonth);
+        int totalIncome = categoryService.getTotalAmountByTypeAndMonth(CategoryType.INCOME, yearMonth);
+        int totalSaved = totalIncome - totalExpense;
+
+        model.addAttribute("chartData", Map.of("income", totalIncome, "expense", totalExpense, "saved", totalSaved));
+        System.out.println("Fetched Categories: " + categoriesList);
+
         return "home";
     }
 

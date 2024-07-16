@@ -5,6 +5,7 @@ import com.example.budget.model.Category;
 import com.example.budget.dto.CategoryCreateDto;
 import com.example.budget.dto.CategoryDto;
 import com.example.budget.mapper.CategoryMapper;
+import com.example.budget.model.CategoryType;
 import com.example.budget.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -52,5 +53,12 @@ public class CategoryService {
         } else {
             throw new IllegalArgumentException("Invalid category ID");
         }
+    }
+
+    public int getTotalAmountByTypeAndMonth(CategoryType categoryType, YearMonth yearMonth) {
+        return categoryRepository.findByCategoryTypeAndCreatedAt(categoryType, yearMonth)
+                .stream()
+                .mapToInt(Category::getTotalAmount)
+                .sum();
     }
 }

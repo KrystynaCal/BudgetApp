@@ -4,26 +4,23 @@
     <title>Budget App</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
-
-
-
-
 <div class="header">
-    <h1><span th:text="Kategorie"></span></h1>
+    <h1><span th:text="'Kategorie'"></span></h1>
     <form th:action="@{/categories}" method="get" class="month-form">
         <input type="month" id="yearMonth" name="yearMonth" th:value="${selectedMonth}">
         <button type="submit">Filtruj</button>
     </form>
 </div>
+
 <div class="categories">
     <div th:each="category : ${categoriesList}" class="category">
         <a th:href="@{'/categories/' + ${category.id()}}" class="category-link">
             <div class="category-content">
                 <p th:text="${category.name()}">Nazwa kategorii</p>
-                <span th:text="${category.totalAmount()} + 'zł '">Kwota</span>
+                <span th:text="${category.totalAmount()} + ' zł'">Kwota</span>
             </div>
         </a>
     </div>
@@ -31,5 +28,56 @@
         <a href="/categories/create" class="plus-button">+</a>
     </div>
 </div>
+
+<!-- Simple Chart Section -->
+<div class="chart-container" style="width: 100%; max-width: 600px; margin: 20px auto;">
+    <canvas id="incomeExpenseChart"></canvas>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('incomeExpenseChart').getContext('2d');
+        const income = /*[[${chartData.income}]]*/ 0;
+        const expense = /*[[${chartData.expense}]]*/ 0;
+        const saved = /*[[${chartData.saved}]]*/ 0;
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Income', 'Expense', 'Savings'],
+                datasets: [{
+                    data: [income, expense, saved],
+                    backgroundColor: ['#4CAF50', '#F44336', '#FFC107'],
+                    hoverBackgroundColor: ['#388E3C', '#D32F2F', '#FFA000'],
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            display: true  // Możesz ustawić display: true, aby sprawdzić, czy osie są widoczne
+                        }
+                    },
+                    x: {
+                        display: false,
+                        ticks: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: false
+                    }
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>
