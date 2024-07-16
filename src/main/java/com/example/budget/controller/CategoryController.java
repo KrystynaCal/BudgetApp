@@ -23,10 +23,15 @@ public class CategoryController {
     private final TransactionService transactionService;
 
     @GetMapping
-    public String getAllCategories(Model model) {
-        List<CategoryDto> categoriesList = categoryService.getAllCategories();
+    public String getAllCategories(@RequestParam(value = "yearMonth", required = false)
+                                       @DateTimeFormat(pattern = "yyyy-MM") YearMonth yearMonth, Model model) {
+        if(yearMonth == null){
+            yearMonth = YearMonth.now();
+        }
+        List<CategoryDto> categoriesList = categoryService.getAllCategories(yearMonth);
         System.out.println("Fetched Categories: " + categoriesList);
         model.addAttribute("categoriesList", categoriesList);
+        model.addAttribute("selectedMonth", yearMonth);
         return "home";
     }
 
@@ -39,20 +44,22 @@ public class CategoryController {
     @PostMapping("/create")
     public String createCategory(@ModelAttribute CategoryCreateDto categoryCreateDto, Model model) {
         categoryService.saveCategory(categoryCreateDto);
+        System.out.println(categoryCreateDto);
         return "redirect:/categories";
     }
 
     @GetMapping("/{categoryId}")
-    public String viewCategory(@PathVariable Long categoryId, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM") YearMonth month, Model model) {
-        if (month == null) {
-            month = YearMonth.now();
+    public String viewCategory(@PathVariable Long categoryId, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM") YearMonth yearMonth, Model model) {
+        if (yearMonth == null) {
+            yearMonth = YearMonth.now();
         }
         CategoryDto categoryDto = categoryService.getCategoryById(categoryId);
-        List<TransactionDto> transactions = transactionService.findByCategoryIdAndMonth(categoryId, month);
+        List<TransactionDto> transactions = transactionService.findByCategoryIdAndMonth(categoryId, yearMonth);
 
 
         model.addAttribute("category", categoryDto);
         model.addAttribute("transactions", transactions);
+        model.addAttribute("selectedMonth", yearMonth);
         return "view-transactions-for-category";
     }
 

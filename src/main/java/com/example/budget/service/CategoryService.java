@@ -9,6 +9,7 @@ import com.example.budget.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,8 +30,8 @@ public class CategoryService {
         return CategoryMapper.toDTO(savedCategory);
     }
 
-    public List<CategoryDto> getAllCategories() {
-        List<Category> categoriesEntity = categoryRepository.findAll();
+    public List<CategoryDto> getAllCategories(YearMonth yearMonth) {
+        List<Category> categoriesEntity = categoryRepository.findByCreatedAt(yearMonth);
         List<CategoryDto> listCategoryDto = categoriesEntity
                 .stream()
                 .map(CategoryMapper::toDTO)

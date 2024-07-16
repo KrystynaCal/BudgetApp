@@ -2,12 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pl">
 <head>
     <title>Budget App</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<h1>Kategorie</h1>
 
+
+
+
+
+<div class="header">
+    <h1><span th:text="Kategorie"></span></h1>
+    <form th:action="@{/categories}" method="get" class="month-form">
+        <input type="month" id="yearMonth" name="yearMonth" th:value="${selectedMonth}">
+        <button type="submit">Filtruj</button>
+    </form>
+</div>
 <div class="categories">
     <div th:each="category : ${categoriesList}" class="category">
         <a th:href="@{'/categories/' + ${category.id()}}" class="category-link">

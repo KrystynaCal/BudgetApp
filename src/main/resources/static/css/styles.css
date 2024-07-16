@@ -126,3 +126,154 @@ form button:hover {
 .plus-button:hover {
     color: #007bff;
 }
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header .title {
+    flex: 1;
+    text-align: left;
+    color: #333;
+    margin: 0;
+}
+
+.header .month-form {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    flex: 1;
+    text-align: left;
+    color: #333;
+    margin: 0;
+}
+
+.header .month-form {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end; /* Zmiana justify-content na flex-end */
+    align-items: center;
+}
+
+/* Styl dla formularza */
+form input[type="month"] {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Styl dla kategorii */
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+}
+
+.category {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.category p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.category span {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #666;
+}
+
+.category:hover {
+    background-color: #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.category-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.add-category {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.add-category:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.plus-button {
+    font-size: 36px;
+    color: #333;
+    text-decoration: none;
+}
+
+.plus-button:hover {
+    color: #007bff;
+}

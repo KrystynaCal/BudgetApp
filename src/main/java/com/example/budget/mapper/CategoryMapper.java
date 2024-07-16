@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  public class CategoryMapper {
 
     public static CategoryDto toDTO(Category category) {
-        return new CategoryDto(category.getId(), category.getName(), category.getCategoryType(), category.getTotalAmount());
+        return new CategoryDto(category.getId(), category.getName(), category.getCategoryType(), category.getTotalAmount(), category.getCreatedAt());
     }
 
 }

@@ -10,8 +10,7 @@
 <div class="header">
     <h1><span th:text="${category.name}"></span></h1>
     <form th:action="@{/categories/{categoryId}(categoryId=${categoryId})}" method="get" class="month-form">
-        <label for="month">Wybierz miesiąc:</label>
-        <input type="month" id="month" name="month" th:value="${selectedMonth}">
+        <input type="month" id="yearMonth" name="yearMonth" th:value="${selectedMonth}">
         <button type="submit">Filtruj</button>
     </form>
 </div>
