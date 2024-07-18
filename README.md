@@ -33,7 +33,9 @@ The next things I will do in the project
 - postgresql
 - lombok
 
-[//]: # (## Database)
+## Swagger
+
+![img_3.png](img_3.png)
 
 [//]: # (![img_1.png]&#40;img_1.png&#41;)
 
