@@ -6,7 +6,7 @@
 
 [//]: # (http://localhost:8080/swagger-ui/index.html)
 
-# On branch *developThymeleaf*
+# *On branch developThymeleaf*
 ## Screenshots
 ![img.png](img.png)
 ![img_2.png](img_2.png)
@@ -33,6 +33,7 @@ The next things I will do in the project
 - postgresql
 - lombok
 
-## Database
-![img_1.png](img_1.png)
+[//]: # (## Database)
+
+[//]: # (![img_1.png]&#40;img_1.png&#41;)
 
