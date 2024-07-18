@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,7 @@ public class CategoryService {
         Category categoryEntity = Category.builder()
                 .name(categoryCreateDto.name())
                 .categoryType(categoryCreateDto.categoryType())
+                .transactions(new ArrayList<>())
                 .build();
         Category savedCategory = categoryRepository.save(categoryEntity);
         return CategoryMapper.toDTO(savedCategory);
@@ -41,6 +43,16 @@ public class CategoryService {
     public Optional<Category> findById(Long categoryId) {
         Optional<Category> category = categoryRepository.findById(categoryId);
         return category;
+    }
+
+    public CategoryDto getCategoryById(Long categoryId) {
+        Optional<Category> categoryOpt = categoryRepository.findById(categoryId);
+        if (categoryOpt.isPresent()) {
+            Category category = categoryOpt.get();
+            return CategoryMapper.toDTO(category);
+        } else {
+            throw new IllegalArgumentException("Invalid category ID");
+        }
     }
 
     public Integer getTotalAmountForCategory(Long categoryId) {

@@ -9,6 +9,8 @@ import com.example.budget.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,5 +64,14 @@ public class TransactionService {
 
     public void deleteTransaction(long id) {
         transactionRepository.deleteById(id);
+    }
+
+    public List<TransactionDto> findByCategoryIdAndMonth(Long categoryId, YearMonth yearMonth) {
+        LocalDate startDate = yearMonth.atDay(1);
+        LocalDate endDate = yearMonth.atEndOfMonth();
+        List<Transaction> transactionsEntityByCategoryIdAndMonth = transactionRepository.findByCategoryIdAndMonth(categoryId, startDate, endDate);
+        return transactionsEntityByCategoryIdAndMonth.stream()
+                .map(TransactionMapper::toDto)
+                .toList();
     }
 }
