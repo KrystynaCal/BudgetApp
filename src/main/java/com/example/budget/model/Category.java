@@ -1,18 +1,14 @@
 package com.example.budget.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Year;
+import java.time.YearMonth;
 import java.util.List;
 
 @Data
@@ -32,8 +28,16 @@ public class Category {
 
     private CategoryType categoryType;
 
+    @Column(nullable = false)
+    private YearMonth createdAt;
+
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Transaction> transactions;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = YearMonth.now();
+    }
 
     public Integer getTotalAmount() {
         return transactions.stream().mapToInt(Transaction::getAmount).sum();

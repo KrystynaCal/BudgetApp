@@ -5,10 +5,12 @@ import com.example.budget.model.Category;
 import com.example.budget.dto.CategoryCreateDto;
 import com.example.budget.dto.CategoryDto;
 import com.example.budget.mapper.CategoryMapper;
+import com.example.budget.model.CategoryType;
 import com.example.budget.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +29,8 @@ public class CategoryService {
         return CategoryMapper.toDTO(savedCategory);
     }
 
-    public List<CategoryDto> getAllCategories() {
-        List<Category> categoriesEntity = categoryRepository.findAll();
+    public List<CategoryDto> getAllCategories(YearMonth yearMonth) {
+        List<Category> categoriesEntity = categoryRepository.findByCreatedAt(yearMonth);
         List<CategoryDto> listCategoryDto = categoriesEntity
                 .stream()
                 .map(CategoryMapper::toDTO)
@@ -49,5 +51,12 @@ public class CategoryService {
         } else {
             throw new IllegalArgumentException("Invalid category ID");
         }
+    }
+
+    public int getTotalAmountByTypeAndMonth(CategoryType categoryType, YearMonth yearMonth) {
+        return categoryRepository.findByCategoryTypeAndCreatedAt(categoryType, yearMonth)
+                .stream()
+                .mapToInt(Category::getTotalAmount)
+                .sum();
     }
 }
