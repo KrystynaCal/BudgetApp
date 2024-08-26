@@ -53,5 +53,10 @@ public class CategoryController {
 
         return new CategoryDetailsDto(categoryDto, transactions);
     }
+    @DeleteMapping("/{categoryId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCategory(@PathVariable Long categoryId){
+        categoryService.deleteCategory(categoryId);
+    }
 
 }

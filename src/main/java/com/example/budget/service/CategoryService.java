@@ -71,4 +71,7 @@ public class CategoryService {
                 .mapToInt(Category::getTotalAmount)
                 .sum();
     }
+    public void deleteCategory(Long categoryId){
+        categoryRepository.deleteById(categoryId);
+    }
 }
